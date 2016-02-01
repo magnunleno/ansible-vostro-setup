@@ -1,0 +1,13 @@
+---
+- name: my setup for Fedora >= 22
+  hosts: local
+  connection: local
+
+  vars:
+    fullname: Magnun Leno
+    email: magnun.leno@gmail.com
+    home: /home/magnun
+    oldhome: /home/old_fedora
+
+  tasks:
+    - include: tasks/base.yml

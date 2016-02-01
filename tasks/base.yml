@@ -1,0 +1,79 @@
+- name: Checks if SELinux is enabled
+  shell: "grep \"SELINUX=disabled\" /etc/selinux/config"
+  ignore_errors: True
+  register: selinux
+
+- name: Disable SELinux
+  selinux: state=disabled
+  sudo: yes
+  when: selinux.rc == 1
+
+- name: Disable iptables
+  service: name=firewalld state=stopped enabled=no
+  sudo: yes
+
+- name: upgrade all packages
+  dnf: name=* state=latest
+  sudo: yes
+
+- name: CLI tools
+  dnf: name={{item}} state=latest
+  with_items:
+       - lynx
+       - tmux
+       - tree
+       - htop
+       - nmap
+       - httpie
+       - ncdu
+       - optipng
+       - youtube-dl
+  sudo: yes
+
+- name: Compressed file formats
+  dnf: name={{item}} state=latest
+  with_items:
+       - cabextract
+       - lzip
+       - p7zip
+       - p7zip-plugins
+       - unrar
+  sudo: yes
+
+- name: Dev Tools
+  dnf: name={{item}} state=latest
+  with_items:
+       - clang
+       - clang-devel
+       - clang-libs
+       - cmake
+       - ctags
+       - automake
+       - autoconf
+       - cpp
+       - gcc
+       - patch
+       - subversion
+       - bzr
+       - git
+       - mercurial
+       - tmate
+       - devhelp
+       - meld
+  sudo: yes
+
+- name: GNOME Apps
+  dnf: name={{item}} state=latest
+  with_items:
+       - gnome-books
+       - gnome-builder
+       - gnome-dictionary
+       - gnome-epub-thumbnailer
+       - gnome-icon-theme
+       - gnome-maps
+       - gnome-music
+       - gnome-shell-extension-user-theme
+       - gnome-themes
+       - gnome-tweak-tool
+       - dconf-editor
+  sudo: yes
