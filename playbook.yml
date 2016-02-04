@@ -6,8 +6,10 @@
   vars:
     fullname: Magnun Leno
     email: magnun.leno@gmail.com
+    username: magnun
     home: /home/magnun
     oldhome: /home/old_fedora
 
   tasks:
     - include: tasks/base.yml
+    - include: tasks/bumblebee.yml
