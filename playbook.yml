@@ -1,15 +1,16 @@
 ---
-- name: my setup for Fedora >= 22
+- name: My Configs for Fedora >= 22
   hosts: local
   connection: local
 
   vars:
     fullname: Magnun Leno
     email: magnun.leno@gmail.com
-    username: magnun
-    home: /home/magnun
-    oldhome: /home/old_fedora
+    hostname: vostro-magnun
+    oldhome: /home/old_fedora/home/magnun
 
   tasks:
+    # Pkg installation
     - include: tasks/base.yml
     - include: tasks/bumblebee.yml
+      when: ansible_product_name == "Dell System Vostro 3460"
