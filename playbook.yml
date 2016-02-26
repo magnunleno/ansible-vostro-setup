@@ -15,3 +15,4 @@
     - include: tasks/bumblebee.yml
       when: ansible_product_name == "Dell System Vostro 3460"
     - include: tasks/python.yml
+    - include: tasks/git.yml
