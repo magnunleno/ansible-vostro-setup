@@ -1,0 +1,26 @@
+- name: Python tools
+  dnf: name={{item}} state=latest
+  with_items:
+       - python3-beautifulsoup4
+       - python-coverage
+       - python-devel
+       - python-docutils
+       - python-extras
+       - python-ipdb
+       - python-ipython
+       - python-pygments
+       - python-sphinx
+       - python-unittest2
+       - python-virtualenvwrapper.noarch
+       - python3-beautifulsoup4
+       - python3-coverage
+       - python3-devel
+       - python3-docutils
+       - python3-extras
+       - python3-ipdb
+       - python3-ipython
+       - python3-pygments
+       - python3-sphinx
+       - python3-tkinter
+       - python3-unittest2
+  sudo: yes
