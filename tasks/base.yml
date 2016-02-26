@@ -1,3 +1,7 @@
+- name: Sets hostname
+  hostname: name={{ hostname }}
+  tags: hostname
+
 - name: Checks if SELinux is enabled
   shell: "grep \"SELINUX=disabled\" /etc/selinux/config"
   ignore_errors: True
