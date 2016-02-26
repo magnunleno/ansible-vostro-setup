@@ -24,6 +24,7 @@
   dnf: name={{item}} state=latest
   with_items:
        - lynx
+       - xclip
        - tmux
        - tree
        - htop
