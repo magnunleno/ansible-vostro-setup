@@ -1,0 +1,31 @@
+- name: Installs VIM
+  dnf:
+    name:
+      - vim-enhanced
+      - neovim
+      - python2-neovim
+      - python3-neovim
+    state: latest
+  become: yes
+
+- name: Checkout my settings
+  git:
+    repo: http://github.com/magnunleno/.vim
+    dest: ~/.vim
+
+- name: Remove old NeoVIM dir
+  file:
+    path: "~/.config/nvim"
+    state: absent
+
+- name: Setup symlinks
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  with_items:
+    - { src: '~/.vim/.vimrc', dest: '~/.vimrc' }
+    - { src: '~/.vim', dest: '~/.config/nvim' }
+
+- name: Download All plugins
+  command: "vim +PlugInstall +qall"
