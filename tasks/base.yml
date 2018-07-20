@@ -1,5 +1,6 @@
 - name: Sets hostname
-  hostname: name={{ hostname }}
+  hostname:
+    name: "{{ hostname }}"
   tags: hostname
 
 - name: Checks if SELinux is enabled
@@ -8,77 +9,45 @@
   register: selinux
 
 - name: Disable SELinux
-  selinux: state=disabled
-  sudo: yes
+  selinux:
+    state: disabled
+  become: yes
   when: selinux.rc == 1
 
 - name: Disable iptables
-  service: name=firewalld state=stopped enabled=no
-  sudo: yes
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+  become: yes
 
 - name: upgrade all packages
-  dnf: name=* state=latest
-  sudo: yes
+  dnf:
+    name: "*"
+    state: latest
+  become: yes
 
 - name: CLI tools
-  dnf: name={{item}} state=latest
-  with_items:
-       - lynx
-       - xclip
-       - tmux
-       - tree
-       - htop
-       - nmap
-       - httpie
-       - ncdu
-       - optipng
-       - youtube-dl
-  sudo: yes
+  dnf:
+    name:
+      - htop
+      - httpie
+      - lynx
+      - ncdu
+      - nmap
+      - optipng
+      - tree
+      - xclip
+      - youtube-dl
+    state: latest
+  become: yes
 
 - name: Compressed file formats
-  dnf: name={{item}} state=latest
-  with_items:
-       - cabextract
-       - lzip
-       - p7zip
-       - p7zip-plugins
-       - unrar
-  sudo: yes
-
-- name: Dev Tools
-  dnf: name={{item}} state=latest
-  with_items:
-       - clang
-       - clang-devel
-       - clang-libs
-       - cmake
-       - ctags
-       - automake
-       - autoconf
-       - cpp
-       - gcc
-       - patch
-       - subversion
-       - bzr
-       - git
-       - mercurial
-       - tmate
-       - devhelp
-       - meld
-  sudo: yes
-
-- name: GNOME Apps
-  dnf: name={{item}} state=latest
-  with_items:
-       - gnome-books
-       - gnome-builder
-       - gnome-dictionary
-       - gnome-epub-thumbnailer
-       - gnome-icon-theme
-       - gnome-maps
-       - gnome-music
-       - gnome-shell-extension-user-theme
-       - gnome-themes
-       - gnome-tweak-tool
-       - dconf-editor
-  sudo: yes
+  dnf:
+    name:
+      - cabextract
+      - lzip
+      - p7zip
+      - p7zip-plugins
+    state: latest
+  become: yes
