@@ -1,0 +1,30 @@
+- name: install the rpmfusion repo packages
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version }}.noarch.rpm
+    - http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version }}.noarch.rpm
+  become: yes
+
+- name: install the rpmfusion repo packages
+  dnf:
+    name:
+      - compat-libstdc++-296
+      - compat-libstdc++-33
+      - faac
+      - faad2
+      - gstreamer
+      - gstreamer-ffmpeg
+      - gstreamer-plugins-bad
+      - gstreamer-plugins-bad-free
+      - gstreamer-plugins-bad-free-extras
+      - gstreamer-plugins-bad-nonfree
+      - gstreamer-plugins-base
+      - gstreamer-plugins-good
+      - gstreamer-plugins-ugly
+      - libdca
+      - wget
+      - xine-lib-extras-freeworld
+    state: latest
+  become: yes
