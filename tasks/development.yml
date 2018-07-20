@@ -1,0 +1,87 @@
+- name: Check if firefox is already installed
+  stat:
+    path: /opt/firefox-developer/firefox-bin
+  register: firefox_installed
+
+- name: Download Firefox-developer
+  get_url:
+    url: https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=pt-BR
+    dest: /tmp/firefox-developer.tar.bz2
+  when: firefox_installed.stat.exists == False 
+
+- name: Unpacks it
+  command: "tar xjvf /tmp/firefox-developer.tar.bz2 -C /tmp/"
+  args:
+    warn: no
+  when: firefox_installed.stat.exists == False 
+
+- name: Rename folder
+  command: "mv /tmp/firefox /opt/firefox-developer"
+  args:
+    warn: no
+  become: yes
+  when: firefox_installed.stat.exists == False 
+
+- name: Copy .desktop file
+  copy:
+    src: ./files/firefox-developer.desktop
+    dest: /usr/share/applications/
+    owner: root
+    group: root
+    mode: o=rw,g=r,o=r
+  become: yes
+  when: firefox_installed.stat.exists == False 
+
+  #  - name: Dev Tools
+  #    dnf:
+  #      name:
+  #        - autoconf
+  #        - automake
+  #        - bzr
+  #        - clang
+  #        - clang-devel
+  #        - clang-libs
+  #        - cmake
+  #        - cpp
+  #        - ctags
+  #        - devhelp
+  #        - gcc
+  #        - git
+  #        - meld
+  #        - mercurial
+  #        - patch
+  #        - subversion
+  #        - tmate
+  #        - tmux
+  #        - zsh
+  #      state: latest
+  #    become: yes
+  #  
+  #  - name: Docker
+  #    dnf:
+  #      name:
+  #        - docker
+  #        - docker-compose
+  #      state: latest
+  #    become: yes
+  #  
+  #  - name: Databases
+  #    dnf:
+  #      name:
+  #        - postgresql
+  #        - pgadmin3
+  #        - redis
+  #      state: latest
+  #    become: yes
+
+- name: Download Gitlab Runner
+  get_url:
+    url: https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+    dest: /usr/local/bin/gitlab-runner
+  become: yes
+
+- name: Fix Gitlab Runner permissions
+  file:
+    path: /usr/local/bin/gitlab-runner
+    mode: o=rwx,g=rx,o=rx
+  become: yes

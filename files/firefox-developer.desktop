@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Firefox Developer
+Comment=Developer edition of the Firefox browser
+Exec=/opt/firefox-developer/firefox
+Icon=/opt/firefox-developer/browser/chrome/icons/default/default128.png
+Terminal=false
+Type=Application
+Categories=Web;
