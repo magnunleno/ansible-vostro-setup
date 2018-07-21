@@ -36,6 +36,8 @@
       - ncdu
       - nmap
       - optipng
+      - pass
+      - qtpass
       - tree
       - xclip
       - youtube-dl
