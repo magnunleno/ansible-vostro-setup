@@ -9,3 +9,33 @@
     name: user.email
     scope: global
     value: "{{ email }}"
+
+- name: Set Git Editor to NeoVIM
+  git_config:
+    name: core.editor
+    scope: global
+    value: nvim
+
+- name: Set Git Caching Credentials
+  git_config:
+    name: credential.helper
+    scope: global
+    value: 'cache --timeout=3600'
+
+- name: Set Git Alias - git st
+  git_config:
+    name: alias.st
+    scope: global
+    value: status .
+
+- name: Set Git Alias - git co
+  git_config:
+    name: alias.co
+    scope: global
+    value: checkout
+
+- name: Set Git Alias - git amend
+  git_config:
+    name: alias.amend
+    scope: global
+    value: commit --amend
