@@ -1,5 +1,5 @@
 ---
-- name: My Configs for Fedora >= 26
+- name: My Configs for Fedora
   hosts: localhost
   connection: local
 
@@ -8,7 +8,6 @@
     email: magnun.leno@gmail.com
     hostname: vostro-magnun
     oldhome: /home/old_fedora/home/magnun
-    fedora_version: 27
 
   tasks:
     # Pkg installation
