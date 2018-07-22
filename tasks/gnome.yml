@@ -78,6 +78,32 @@
     state: absent
   become: yes
 
+- name: Check if user has a .fonts folder
+  stat:
+    path: ~/.fonts
+  register: fonts
+
+- name: Creates a .fonts folder
+  file:
+    path: ~/.fonts
+    state: directory
+  when: fonts.stat.exists == False
+
+- name: Copy hurmit fonts
+  copy:
+    src: "./files/hurmit/{{ item }}"
+    dest: "~/.fonts/{{ item }}"
+  with_items:
+    - 'HurmitBoldNerdFontCompleteMono.otf'
+    - 'HurmitBoldNerdFontComplete.otf'
+    - 'HurmitLightNerdFontCompleteMono.otf'
+    - 'HurmitLightNerdFontComplete.otf'
+    - 'HurmitMediumNerdFontCompleteMono.otf'
+    - 'HurmitMediumNerdFontComplete.otf'
+
+- name: Update font cache
+  command: fc-cache -f -v
+
 - name: Query Gnome-Terminal profile name
   command: 'dconf list /org/gnome/terminal/legacy/profiles:/'
   register: profile
@@ -93,13 +119,12 @@
     - {key: '/org/gnome/desktop/search-providers/disable-external', value: 'true'}
     - {key: '/org/gnome/desktop/wm/preferences/audible-bell', value: 'false'}
     - {key: '/org/gnome/settings-daemon/plugins/color/night-light-enabled', value: 'true'}
-    # - {key: '/org/gnome/settings-daemon/plugins/xsettings/antialiasing', value: "'rgba'"}
     - {key: '/org/gnome/software/allow-updates', value: 'false'}
     - {key: '/org/gnome/software/download-updates', value: 'false'}
     - {key: '/org/gnome/desktop/interface/show-battery-percentage', value: 'true'}
     - {key: '/org/gnome/desktop/wm/preferences/xkb-options', value: "['caps:escape']"}
     - {key: '/org/gnome/desktop/peripherals/touchpad/tap-to-click', value: 'true'}
+    - {key: "/org/gnome/desktop/interface/monospace-font-name", value: "'Hurmit Nerd Font Medium 10'"}
     - {key: '/org/gnome/terminal/legacy/default-show-menubar', value: 'false'}
     - {key: '/org/gnome/terminal/legacy/default-show-menubar', value: 'false'}
-    - {key: "/org/gnome/terminal/legacy/profiles:/{{ profile.stdout.split('\n')[1] }}use-system-font", value: 'false'}
-    - {key: "/org/gnome/terminal/legacy/profiles:/{{ profile.stdout.split('\n')[1] }}font", value: "'Inconsolata-dz for Powerline Medium 12'"}
+    - {key: "/org/gnome/terminal/legacy/profiles:/{{ profile.stdout.split('\n')[1] }}scrollbar-policy", value: "'never'"}
