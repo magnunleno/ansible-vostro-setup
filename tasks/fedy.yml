@@ -1,0 +1,28 @@
+- name: Installs fedy repo
+  dnf:
+    name: 'https://dl.folkswithhats.org/fedora/{{ ansible_distribution_version }}/RPMS/fedy-release.rpm'
+  become: yes
+
+- name: Installs fedy
+  dnf:
+    name: fedy
+  become: yes
+
+- name: Installs Spotify
+  command: 'bash /usr/share/fedy/plugins/spotify.plugin/install.sh'
+  become: yes
+
+- name: Installs Chrome
+  command: 'bash /usr/share/fedy/plugins/chrome.plugin/install.sh'
+  ignore_errors: yes
+  become: yes
+
+- name: Installs Dropbox
+  command: 'bash /usr/share/fedy/plugins/dropbox.plugin/install.sh'
+  become: yes
+
+- name: Install Multimedia Codecs
+  dnf:
+    name: '@multimedia'
+  become: yes
+  state: present

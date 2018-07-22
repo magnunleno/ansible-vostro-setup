@@ -13,12 +13,14 @@
     # Pkg installation
     - include: tasks/base.yml
       tags: base
+    - include: tasks/rpmfusion.yml
+      tags: rpmfusion
+    - include: tasks/fedy.yml
+      tags: fedy
     - include: tasks/gnome.yml
       tags: gnome
     - include: tasks/python.yml
       tags: python
-    - include: tasks/rpmfusion.yml
-      tags: rpmfusion
     - include: tasks/development.yml
       tags: development
     - include: tasks/vim.yml
