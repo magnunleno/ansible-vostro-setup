@@ -24,6 +24,7 @@
       - gstreamer-plugins-good
       - gstreamer-plugins-ugly
       - libdca
+      - unrar
       - wget
       - xine-lib-extras-freeworld
     state: latest
