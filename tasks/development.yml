@@ -35,6 +35,7 @@
 - name: Dev Tools
   dnf:
     name:
+      - npm
       - autoconf
       - automake
       - bzr
