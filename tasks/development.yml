@@ -35,7 +35,6 @@
 - name: Dev Tools
   dnf:
     name:
-      - npm
       - autoconf
       - automake
       - bzr
@@ -50,8 +49,10 @@
       - git
       - meld
       - mercurial
+      - npm
       - patch
       - subversion
+      - the_silver_searcher
       - tmate
       - tmux
       - zsh
