@@ -29,3 +29,6 @@
 
 - name: Download All plugins
   command: "vim +PlugInstall +qall"
+
+- name: Download All plugins in nvim
+  command: "nvim +PlugInstall +qall"
