@@ -53,3 +53,10 @@
       - p7zip-plugins
     state: latest
   become: yes
+
+- name: Others packages
+  dnf:
+    name:
+      - calibre
+    state: latest
+  become: yes
