@@ -7,8 +7,10 @@
       - python3-devel
       - python3-docutils
       - python3-extras
+      - python3-flake8
       - python3-ipdb
       - python3-ipython
+      - python3-jedi
       - python3-pip
       - python3-pygments
       - python3-sphinx
@@ -18,8 +20,10 @@
       - python-devel
       - python-docutils
       - python-extras
+      - python-flake8
       - python-ipdb
       - python-ipython
+      - python-jedi
       - python-pygments
       - python-sphinx
       - python-unittest2
@@ -31,4 +35,5 @@
   pip:
     name:
       - pipenv
+      - isort
   become: yes
