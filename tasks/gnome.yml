@@ -128,3 +128,5 @@
     - {key: '/org/gnome/terminal/legacy/default-show-menubar', value: 'false'}
     - {key: '/org/gnome/terminal/legacy/default-show-menubar', value: 'false'}
     - {key: "/org/gnome/terminal/legacy/profiles:/{{ profile.stdout.split('\n')[1] }}scrollbar-policy", value: "'never'"}
+    - {key: "/org/gnome/shell/enabled-extensions", value: "['user-theme@gnome-shell-extensions.gcampax.github.com', 'TopIcons@phocean.net']"}
+    - {key: "/org/gnome/shell/extensions/topicons/tray-pos", value: "'right'"}
