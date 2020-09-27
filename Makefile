@@ -4,6 +4,6 @@ ansible:
 	ansible-playbook provision.yml -K
 
 dependencies:
-	sudo dnf install ansible libselinux-python python2-psutil
+	sudo apt install ansible
 
 .PHONY: dependencies ansible run

@@ -1,9 +1,8 @@
 - name: Installs VIM
-  dnf:
+  apt:
     name:
-      - vim-enhanced
+      - vim
       - neovim
-      - python2-neovim
       - python3-neovim
     state: latest
   become: yes
@@ -17,6 +16,11 @@
   file:
     path: "~/.config/nvim"
     state: absent
+
+- name: Create ~/.config file if absent
+  file:
+    path: ~/.config
+    state: directory
 
 - name: Setup symlinks
   file:

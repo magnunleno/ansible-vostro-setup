@@ -1,5 +1,5 @@
 ---
-- name: My Configs for Fedora
+- name: My Configs for Ubuntu 20.04 on WSL2
   hosts: localhost
   connection: local
 
@@ -7,18 +7,10 @@
     fullname: Magnun Leno
     email: magnun.leno@gmail.com
     hostname: vostro-magnun
-    oldhome: /home/old_fedora/home/magnun
 
   tasks:
-    # Pkg installation
     - include: tasks/base.yml
       tags: base
-    - include: tasks/rpmfusion.yml
-      tags: rpmfusion
-    - include: tasks/fedy.yml
-      tags: fedy
-    - include: tasks/gnome.yml
-      tags: gnome
     - include: tasks/python.yml
       tags: python
     - include: tasks/development.yml
@@ -27,6 +19,3 @@
       tags: vim
     - include: tasks/git.yml
       tags: git
-    - include: tasks/bumblebee.yml
-      when: ansible_product_name == "Dell System Vostro 3460"
-      tags: bumblebee

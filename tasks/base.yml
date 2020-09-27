@@ -1,34 +1,23 @@
-- name: Sets hostname
-  hostname:
-    name: "{{ hostname }}"
-  tags: hostname
-
-- name: Checks if SELinux is enabled
-  shell: "grep \"SELINUX=disabled\" /etc/selinux/config"
-  ignore_errors: True
-  register: selinux
-
-- name: Disable SELinux
-  selinux:
-    state: disabled
+- name: Copy WSL config file
+  copy:
+    src: files/wsl.conf
+    dest: /etc/wsl.conf
   become: yes
-  when: selinux.rc == 1
 
-- name: Disable iptables
-  service:
-    name: firewalld
-    state: stopped
-    enabled: no
+- name: Copy resolv.conf
+  copy:
+    src: files/resolv.conf
+    dest: /etc/resolv.conf
   become: yes
 
 - name: upgrade all packages
-  dnf:
+  apt:
     name: "*"
     state: latest
   become: yes
 
 - name: CLI tools
-  dnf:
+  apt:
     name:
       - htop
       - httpie
@@ -36,8 +25,6 @@
       - ncdu
       - nmap
       - optipng
-      - pass
-      - qtpass
       - tree
       - xclip
       - youtube-dl
@@ -45,18 +32,11 @@
   become: yes
 
 - name: Compressed file formats
-  dnf:
+  apt:
     name:
       - cabextract
       - lzip
       - p7zip
-      - p7zip-plugins
-    state: latest
-  become: yes
-
-- name: Others packages
-  dnf:
-    name:
-      - calibre
+      - p7zip-full
     state: latest
   become: yes
