@@ -4,10 +4,20 @@
     dest: /etc/wsl.conf
   become: yes
 
+- name: Remove old resolv.conf link or file
+  file: path=/etc/resolv.conf state=absent
+  become: yes
+
 - name: Copy resolv.conf
   copy:
     src: files/resolv.conf
     dest: /etc/resolv.conf
+  become: yes
+
+- name: Ensure resolv.conf is immutable.
+  file:
+    path: /etc/resolv.conf
+    attr: +i
   become: yes
 
 - name: upgrade all packages
